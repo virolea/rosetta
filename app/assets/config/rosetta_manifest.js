@@ -1,1 +1,1 @@
-//= link_directory ../stylesheets/rosetta .css
+//= link_directory ../builds/rosetta

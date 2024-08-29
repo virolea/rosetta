@@ -1,9 +1,15 @@
 {
   "scripts": {
     "build:css": "tailwindcss -i ./app/assets/stylesheets/rosetta/application.css -o ./app/assets/builds/rosetta/application.css",
-    "build:css:watch": "tailwindcss -i ./app/assets/stylesheets/rosetta/application.css -o ./app/assets/builds/rosetta/application.css --watch"
+    "build:css:watch": "npm run build:css -- --watch",
+    "build:js": "esbuild app/assets/javascripts/rosetta/*.* --bundle --format=esm --outdir=app/assets/builds/rosetta",
+    "build:js:watch": "npm run build:js -- --watch"
   },
   "devDependencies": {
+    "esbuild": "^0.23.1",
     "tailwindcss": "^3.4.10"
+  },
+  "dependencies": {
+    "@hotwired/turbo-rails": "^8.0.5"
   }
 }

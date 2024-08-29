@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/rosetta/application.css -o ./app/assets/builds/rosetta/application.css",
+    "build:css:watch": "tailwindcss -i ./app/assets/stylesheets/rosetta/application.css -o ./app/assets/builds/rosetta/application.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}

@@ -7,7 +7,7 @@ export default class extends Controller {
     e.preventDefault();
     const link = e.currentTarget;
     this.dialogTarget.showModal();
-    this.loadingContent = this.contentTarget.innerHTML;
+    this.loadingIndicator = this.contentTarget.innerHTML;
     this.contentTarget.src = link.href;
   }
 
@@ -27,7 +27,7 @@ export default class extends Controller {
   }
 
   resetContent() {
-    this.contentTarget.innerHTML = this.loadingContent;
+    this.contentTarget.innerHTML = this.loadingIndicator;
     this.setTitle("");
   }
 

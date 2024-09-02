@@ -1,6 +1,6 @@
 module Rosetta
   class Locale < ApplicationRecord
-    CODE_FORMAT = /\A[a-zA-Z]+(-[a-zA-Z]+)?\z/
+    CODE_FORMAT = /\A[a-z]+(-[A-Z]+)?\z/
 
     validates :name, :code, presence: true
     validates :code, uniqueness: true

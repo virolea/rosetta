@@ -1,0 +1,20 @@
+<dialog class="absolute max-w-4xl w-full mx-auto p-12 top-4 left-0 m-0 h-full bg-transparent" data-dialog-target="dialog" data-action="close->dialog#resetContent click->dialog#safeClose">
+  <div class="bg-white shadow ring-1 ring-black ring-opacity-5 max-w-xl mt-4 mx-auto rounded-lg overflow-hidden w-full">
+    <div class="flex justify-between bg-gray-50 py-4 px-6 text-gray-900 font-semibold border-b border-gray-300">
+      <h4 data-dialog-target="title"></h4>
+
+      <button type="button" class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" data-action="dialog#close">
+        <span class="sr-only">Close</span>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="p-4">
+      <%= turbo_frame_tag "dialog_content", data: { dialog_target: "content" }  do %>
+        <%= yield %>
+      <% end %>
+    </div>
+  </div>
+</dialog>

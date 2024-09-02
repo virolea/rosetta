@@ -1,4 +1,4 @@
-<%= form_with model: locale, class: "grid gap-2" do |f| %>
+<%= form_with model: locale, class: "grid gap-2", data: { turbo_frame: "_top" } do |f| %>
   <% if @locale.errors[:code].any? %>
     <div class="rounded-md bg-red-50 p-4">
       <div class="flex">

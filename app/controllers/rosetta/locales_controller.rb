@@ -14,8 +14,7 @@ module Rosetta
       if @locale.save
         redirect_to locales_path
       else
-
-       render turbo_stream: turbo_stream.replace(
+       render turbo_stream: turbo_stream.update(
          :dialog_content,
          partial: "form",
          locals: { locale: @locale }

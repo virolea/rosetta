@@ -12,7 +12,7 @@
     </div>
 
     <div class="p-4">
-      <%= turbo_frame_tag "dialog_content", data: { dialog_target: "content" }  do %>
+      <%= turbo_frame_tag "dialog_content", data: { dialog_target: "content" } do %>
         <%= yield %>
       <% end %>
     </div>

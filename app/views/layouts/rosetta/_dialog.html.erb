@@ -1,5 +1,5 @@
 <dialog class="absolute max-w-4xl w-full mx-auto p-12 top-4 left-0 m-0 h-full bg-transparent" data-dialog-target="dialog" data-action="close->dialog#resetContent click->dialog#safeClose">
-  <div class="bg-white shadow ring-1 ring-black ring-opacity-5 max-w-xl mt-4 mx-auto rounded-lg overflow-hidden w-full">
+  <div class="bg-white shadow ring-1 ring-black ring-opacity-5 max-w-xl mt-4 mx-auto rounded-lg overflow-hidden w-full" data-dialog-target="content">
     <div class="flex justify-between bg-gray-50 py-4 px-6 text-gray-900 font-semibold border-b border-gray-300">
       <h4 data-dialog-target="title"></h4>
 
@@ -12,7 +12,7 @@
     </div>
 
     <div class="p-4">
-      <%= turbo_frame_tag "dialog_content", data: { dialog_target: "content" } do %>
+      <%= turbo_frame_tag "dialog_content", data: { dialog_target: "turboFrame" } do %>
         <%= yield %>
       <% end %>
     </div>

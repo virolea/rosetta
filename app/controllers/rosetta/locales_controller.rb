@@ -1,7 +1,7 @@
 module Rosetta
   class LocalesController < ApplicationController
     def index
-      @locales = [ Locale.default ] + Locale.all
+      @locales = [ Locale.default_locale ] + Locale.all
     end
 
     def new

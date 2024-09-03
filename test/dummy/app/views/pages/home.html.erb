@@ -1,0 +1,19 @@
+<h1 class="text-2xl font-semibold">Test Page</h1>
+
+<div class="space-y-4 mt-8">
+  <div>
+    <h3 class="text-lg font-semibold">Current locale</h3>
+    <div>
+      <%= Rosetta.locale.name %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="text-lg font-semibold">Available locales</h3>
+    <ul class="list-disc pl-4">
+      <% Rosetta::Locale.available_locales.each do |locale| %>
+        <li><%= locale.name %> - <%= link_to "Switch", root_path(locale: locale.code), class: "text-blue-500 hover:underline" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

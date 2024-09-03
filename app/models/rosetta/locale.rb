@@ -4,12 +4,11 @@ module Rosetta
 
     validates :name, :code, presence: true
     validates :code, uniqueness: true
-    # TODO: make sure one cannot add the default locale twice
     validates :code, format: { with: CODE_FORMAT, message: "must only contain letters separated by an optional dash" }
 
     class << self
       def available_locales
-        [ Locale.default ] + all # .published
+        [ Locale.default_locale ] + all # .published
       end
 
       # The default locale is the locale in which the application is written.

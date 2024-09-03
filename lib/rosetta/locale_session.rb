@@ -1,7 +1,7 @@
 module Rosetta
   class LocaleSession
     def locale
-      @locale ||= Locale.default
+      @locale ||= Locale.default_locale
     end
 
     def locale=(value)

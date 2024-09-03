@@ -1,8 +1,8 @@
 require "test_helper"
 
 class Rosetta::LocaleSessionTest < ActiveSupport::TestCase
-  test "default locale is the default locale" do
-    assert_equal Rosetta.locale, Rosetta::LocaleSession.new.locale
+  test "locale is the default locale by default" do
+    assert_equal Rosetta::Locale.default_locale, Rosetta::LocaleSession.new.locale
   end
 
   test "assigning a locale as a string" do

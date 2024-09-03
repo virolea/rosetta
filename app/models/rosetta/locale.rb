@@ -8,8 +8,24 @@ module Rosetta
 
     class << self
       def available_locales
-        pluck(:code).map(&:to_sym)
+        all # .published
       end
+
+      # The default locale is the locale in which the application is written.
+      # Default is english.
+      # TODO: Make this configurable.
+      def default
+        new(name: "English", code: "en").as_default
+      end
+    end
+
+    def default_locale?
+      @default_locale ||= false
+    end
+
+    def as_default
+      @default_locale = true
+      self
     end
   end
 end

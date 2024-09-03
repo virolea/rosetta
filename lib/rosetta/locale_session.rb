@@ -9,7 +9,7 @@ module Rosetta
       when Locale
         @locale = value
       when String, Symbol
-        @locale = Locale.find_by(code: value) || Locale.default
+        @locale = Locale.find_by(code: value) || Locale.default_locale
       end
     end
   end

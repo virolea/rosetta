@@ -18,4 +18,10 @@ class Rosetta::LocaleSessionTest < ActiveSupport::TestCase
     session.locale = locale
     assert_equal locale, session.locale
   end
+
+  test "assigning a non-existing locale fallbacks to the default locale" do
+    session = Rosetta::LocaleSession.new
+    session.locale = "non-existing"
+    assert_equal Rosetta::Locale.default_locale, session.locale
+  end
 end

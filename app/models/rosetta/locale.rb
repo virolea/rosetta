@@ -15,7 +15,7 @@ module Rosetta
       # Default is english.
       # TODO: Make this configurable.
       def default
-        new(name: "English", code: "en").as_default
+        @default ||= new(name: "English", code: "en").as_default
       end
     end
 

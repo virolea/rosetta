@@ -39,6 +39,14 @@ class Rosetta::LocaleTest < ActiveSupport::TestCase
   test "available locales" do
     Rosetta::Locale.create(name: "English", code: "en")
     Rosetta::Locale.create(name: "French", code: "fr")
-    assert_equal [ :en, :fr ], Rosetta::Locale.available_locales
+    assert_equal 2, Rosetta::Locale.available_locales.length
+    assert_equal [ :en, :fr ], Rosetta::Locale.available_locales.pluck(:code).map(&:to_sym)
+  end
+
+  test "default locale" do
+    default_locale = Rosetta::Locale.default
+    assert_equal "English", default_locale.name
+    assert_equal "en", default_locale.code
+    assert default_locale.default_locale?
   end
 end

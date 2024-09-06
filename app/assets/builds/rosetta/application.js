@@ -8247,11 +8247,13 @@
   // app/assets/javascripts/rosetta/controllers/dialog_controller.js
   var dialog_controller_default = class extends Controller {
     static targets = ["dialog", "content", "title", "titleSource", "turboFrame"];
+    initialize() {
+      this.loadingIndicator = this.turboFrameTarget.innerHTML;
+    }
     open(e) {
       e.preventDefault();
       const link = e.currentTarget;
       this.dialogTarget.showModal();
-      this.loadingIndicator = this.contentTarget.innerHTML;
       this.turboFrameTarget.src = link.href;
     }
     safeClose(e) {

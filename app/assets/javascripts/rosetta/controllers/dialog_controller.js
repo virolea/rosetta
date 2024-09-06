@@ -3,11 +3,14 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["dialog", "content", "title", "titleSource", "turboFrame"];
 
+  initialize() {
+    this.loadingIndicator = this.turboFrameTarget.innerHTML;
+  }
+
   open(e) {
     e.preventDefault();
     const link = e.currentTarget;
     this.dialogTarget.showModal();
-    this.loadingIndicator = this.contentTarget.innerHTML;
     this.turboFrameTarget.src = link.href;
   }
 

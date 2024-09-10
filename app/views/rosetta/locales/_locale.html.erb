@@ -13,7 +13,7 @@
     <% end %>
 
     <% unless locale.default_locale? %>
-      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, <%= locale.name %></span></a>
+      <%= link_to "Manage", locale_translation_keys_path(locale), class: "text-indigo-600 hover:text-indigo-900" %>
     <% end %>
   </td>
 </tr>

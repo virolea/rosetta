@@ -1,0 +1,42 @@
+<div class="sm:flex sm:items-center">
+  <div class="sm:flex-auto">
+    <nav class="flex">
+      <ol role="list" class="flex items-center space-x-2">
+        <li>
+          <%= link_to "Locales", locales_path, class: "text-base font-semibold leading-6 text-indigo-600 hover:text-indigo-900" %>
+        </li>
+
+        <li>
+          <div class="flex items-center">
+            <svg class="h-5 w-5 flex-shrink-0 text-gray-900" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+            </svg>
+
+            <a href="#" class="ml-2 text-base font-semibold leading-6 text-gray-900" aria-current="page"><%= @locale.name %></a>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <p class="mt-2 text-sm text-gray-700">
+      Manage translations for this locale.
+    </p>
+  </div>
+</div>
+
+<div class="mt-8">
+  <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Translation Key</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Translation</th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <%= render collection: @translation_keys, partial: "rosetta/locales/translation_keys/translation_key" %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     rosetta (0.1.0)
+      pagy (~> 9.0)
       rails (>= 7.2.0)
       turbo-rails (~> 2.0)
 
@@ -124,6 +125,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    pagy (9.0.9)
     parallel (1.26.2)
     parser (3.3.4.2)
       ast (~> 2.4.1)

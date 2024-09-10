@@ -5,6 +5,7 @@ module.exports = {
     "app/helpers/**/*",
     "app/assets/javascripts/**/*",
   ],
+  safelist: ["pagy"],
   theme: {
     extend: {},
   },

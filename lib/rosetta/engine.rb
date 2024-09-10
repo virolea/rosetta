@@ -1,4 +1,5 @@
 require "turbo-rails"
+require "pagy"
 
 module Rosetta
   class Engine < ::Rails::Engine

@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", ">= 7.2.0"
   spec.add_dependency "turbo-rails", "~> 2.0"
+  spec.add_dependency "pagy", "~> 9.0"
 end

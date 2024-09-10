@@ -6,9 +6,11 @@ module Rosetta
     validates :code, uniqueness: true
     validates :code, format: { with: CODE_FORMAT, message: "must only contain letters separated by an optional dash" }
 
+    has_many :translations, dependent: :destroy
+
     class << self
       def available_locales
-        [ Locale.default_locale ] + all # .published
+        [ Locale.default_locale ] + all
       end
 
       # The default locale is the locale in which the application is written.

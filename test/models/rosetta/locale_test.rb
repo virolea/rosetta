@@ -30,8 +30,9 @@ class Rosetta::LocaleTest < ActiveSupport::TestCase
 
   test "code format" do
     assert     Rosetta::Locale.new(name: "English", code: "en").valid?
+    assert     Rosetta::Locale.new(name: "English", code: "EN").valid?
     assert     Rosetta::Locale.new(name: "English", code: "en-GB").valid?
-    assert_not Rosetta::Locale.new(name: "English", code: "EN").valid?
+    assert     Rosetta::Locale.new(name: "English", code: "EN-gb").valid?
     assert_not Rosetta::Locale.new(name: "English", code: "en-GB-UK").valid?
     assert_not Rosetta::Locale.new(name: "English", code: "qw12").valid?
   end

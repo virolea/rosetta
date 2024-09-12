@@ -13,7 +13,7 @@ module Rosetta
     private
 
     def set_locale
-      @locale = Locale.find(params[:locale_id])
+      @locale = Locale.find_by!(code: params[:locale_id])
     end
   end
 end

@@ -21,6 +21,10 @@ module Rosetta
       end
     end
 
+    def to_param
+      code
+    end
+
     def default_locale?
       @default ||= false
     end

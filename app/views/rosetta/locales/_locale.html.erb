@@ -13,7 +13,7 @@
     <% end %>
 
     <% unless locale.default_locale? %>
-      <%= link_to "Manage", locale_translation_keys_path(locale), class: "text-indigo-600 hover:text-indigo-900" %>
+      <%= link_to "Manage", locale_translations_path(locale), class: "text-indigo-600 hover:text-indigo-900" %>
     <% end %>
   </td>
 </tr>

@@ -9,7 +9,7 @@ module Rosetta
 
     def update
       if @translation.update(translation_params)
-        redirect_to locale_translation_keys_path(@locale)
+        redirect_to locale_translations_path(@locale)
       end
     end
 

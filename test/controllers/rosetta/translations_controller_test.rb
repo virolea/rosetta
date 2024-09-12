@@ -21,7 +21,7 @@ module Rosetta
 
       assert_equal "Bonjour", Translation.last.value
       assert_response :redirect
-      assert_redirected_to locale_translation_keys_path(@locale)
+      assert_redirected_to locale_translations_path(@locale)
     end
 
     test "update an existing translation" do
@@ -33,7 +33,7 @@ module Rosetta
 
       assert_equal "Bonjour", Translation.last.value
       assert_response :redirect
-      assert_redirected_to locale_translation_keys_path(@locale)
+      assert_redirected_to locale_translations_path(@locale)
     end
   end
 end

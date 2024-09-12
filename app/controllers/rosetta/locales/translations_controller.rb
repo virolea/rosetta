@@ -1,5 +1,5 @@
 module Rosetta
-  class Locales::TranslationKeysController < ApplicationController
+  class Locales::TranslationsController < ApplicationController
     before_action :set_locale
 
     def index

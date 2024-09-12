@@ -3,7 +3,7 @@ Rosetta::Engine.routes.draw do
 
   resources :locales do
     scope module: :locales do
-      resources :translation_keys, only: :index
+      resources :translations, only: :index
     end
   end
 

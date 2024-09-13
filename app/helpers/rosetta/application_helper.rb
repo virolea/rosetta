@@ -1,6 +1,7 @@
 module Rosetta
   module ApplicationHelper
-    include DialogHelper
     include Pagy::Frontend
+    include DialogHelper
+    include NavigationHelper
   end
 end

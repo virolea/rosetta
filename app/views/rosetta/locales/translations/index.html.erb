@@ -24,7 +24,9 @@
   </div>
 </div>
 
-<div class="mt-8">
+<%= render "rosetta/locales/translations/navigation" %>
+
+<div class="mt-4">
   <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
     <table class="min-w-full divide-y divide-gray-300">
       <thead class="bg-gray-50">
@@ -35,7 +37,10 @@
       </thead>
 
       <tbody class="divide-y divide-gray-200 bg-white">
-        <%= render collection: @translation_keys, partial: "rosetta/locales/translations/translation_key" %>
+        <%= render(
+          collection: @translations,
+          as: :translation_key_with_translation,
+          partial: "rosetta/locales/translations/translation_key_with_translation") %>
       </tbody>
     </table>
   </div>

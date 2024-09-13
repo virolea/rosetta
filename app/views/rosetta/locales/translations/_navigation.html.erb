@@ -1,0 +1,16 @@
+<div class="mt-6">
+  <div class="border-b border-gray-200 flex justify-between items-center">
+    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+      <%= tab_link_to "All", locale_translations_path(@locale) %>
+
+      <%= tab_link_to locale_translations_missing_index_path(@locale) do %>
+        Missing
+        <span class="ml-3 hidden md:inline-block rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-900 group-[.active]:bg-indigo-100 group-[.active]:text-indigo-600">
+          <%= Rosetta::TranslationKey.with_missing_translation_in_locale(@locale).size %>
+        </span>
+      <% end %>
+    </nav>
+
+    <input type="text" placeholder="Search translations" class="input w-60">
+  </div>
+</div>

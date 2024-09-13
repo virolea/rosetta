@@ -3,14 +3,16 @@ module Rosetta
     before_action :set_locale
 
     def index
-      @pagy, @translation_keys = pagy(TranslationKey
-        .includes(:translations)
-        .joins("LEFT JOIN rosetta_translations ON rosetta_translations.translation_key_id = rosetta_translation_keys.id AND rosetta_translations.locale_id = #{@locale.id}")
-        .order(created_at: :desc)
-      )
+      @pagy, @translations = pagy(scope)
+
+      render "rosetta/locales/translations/index"
     end
 
     private
+
+    def scope
+      TranslationKey.all_in_locale(@locale)
+    end
 
     def set_locale
       @locale = Locale.find_by!(code: params[:locale_id])

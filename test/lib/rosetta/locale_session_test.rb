@@ -6,14 +6,14 @@ class Rosetta::LocaleSessionTest < ActiveSupport::TestCase
   end
 
   test "assigning a locale as a string" do
-    locale = Rosetta::Locale.create(name: "French", code: "fr")
+    locale = rosetta_locales(:french)
     session = Rosetta::LocaleSession.new
     session.locale = locale.code
     assert_equal locale, session.locale
   end
 
   test "assigning the locale as a locale object" do
-    locale = Rosetta::Locale.create(name: "French", code: "fr")
+    locale = rosetta_locales(:french)
     session = Rosetta::LocaleSession.new
     session.locale = locale
     assert_equal locale, session.locale

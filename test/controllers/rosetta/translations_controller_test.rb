@@ -5,8 +5,8 @@ module Rosetta
     include Engine.routes.url_helpers
 
     setup do
-      @locale = Locale.create!(code: "fr", name: "French")
-      @key = TranslationKey.create!(value: "Hello")
+      @locale = rosetta_locales(:french)
+      @key = rosetta_translation_keys(:goodbye)
     end
 
     test "edit" do
@@ -16,10 +16,10 @@ module Rosetta
 
     test "add a new translation" do
       assert_difference("Translation.count", 1) do
-        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation: { value: "Bonjour" } }
+        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation: { value: "Au revoir" } }
       end
 
-      assert_equal "Bonjour", Translation.last.value
+      assert_equal "Au revoir", Translation.last.value
       assert_response :redirect
       assert_redirected_to locale_translations_path(@locale)
     end

@@ -17,7 +17,7 @@ module Rosetta
 
     test "create with valid input" do
       assert_difference("Locale.count", 1) do
-        post locales_path, params: { locale: { code: "fr", name: "French" } }
+        post locales_path, params: { locale: { code: "de", name: "German" } }
       end
 
       assert_redirected_to locales_path

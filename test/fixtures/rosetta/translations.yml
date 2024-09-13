@@ -1,0 +1,4 @@
+french_hello:
+  translation_key: hello
+  locale: french
+  value: bonjour

@@ -5,8 +5,8 @@ module Rosetta
     include Engine.routes.url_helpers
 
     test "index" do
-      locale = Locale.create(code: "fr", name: "French")
-      key = TranslationKey.create(value: "hello")
+      locale = rosetta_locales(:french)
+      key = rosetta_translation_keys(:hello)
       get locale_translations_path(locale)
       assert_response :success
       assert_includes response.body, "hello"

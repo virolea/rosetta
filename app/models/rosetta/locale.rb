@@ -31,6 +31,7 @@ module Rosetta
 
     def as_default
       @default = true
+      readonly!
       self
     end
   end

@@ -47,5 +47,6 @@ class Rosetta::LocaleTest < ActiveSupport::TestCase
     assert_equal "English", default_locale.name
     assert_equal "en", default_locale.code
     assert default_locale.default_locale?
+    assert default_locale.readonly?
   end
 end

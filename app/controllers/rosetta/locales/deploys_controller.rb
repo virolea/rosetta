@@ -6,7 +6,7 @@ module Rosetta
       @locale.touch
       flash[:notice] = "#{@locale.name} changes have been deployed."
 
-      redirect_to locale_translations_path(@locale)
+      redirect_back(fallback_location: locale_translations_path(@locale))
     end
   end
 end

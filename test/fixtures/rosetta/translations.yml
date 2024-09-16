@@ -2,3 +2,8 @@ french_hello:
   translation_key: hello
   locale: french
   value: bonjour
+
+spanish_hello:
+  translation_key: hello
+  locale: spanish
+  value: hola

@@ -1,6 +1,8 @@
 require "rosetta/version"
 require "rosetta/engine"
+
 require "rosetta/locale_session"
+require "rosetta/store"
 
 module Rosetta
   module Base
@@ -14,6 +16,10 @@ module Rosetta
 
     def locale_session
       Thread.current[:rosetta_locale_session] ||= LocaleSession.new
+    end
+
+    def store
+      Store.for_locale(Rosetta.locale)
     end
   end
 

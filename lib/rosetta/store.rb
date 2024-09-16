@@ -2,14 +2,17 @@ module Rosetta
   class Store
     class_attribute :locale_stores, default: Concurrent::Map.new
 
-    attr_reader :locale
+    attr_reader :locale, :cache_expiration_timestamp
 
     def self.for_locale(locale)
-      locale_stores[locale.code.to_sym] ||= new(locale)
+      store = locale_stores[locale.code.to_sym] ||= new(locale)
+      store.touch!(locale.updated_at)
+      store
     end
 
     def initialize(locale)
       @locale = locale
+      @cache_expiration_timestamp = @locale.updated_at
       @autodiscovery_queue = Queue.new
 
       start_key_autodiscovery!
@@ -28,6 +31,13 @@ module Rosetta
 
     def reload!
       @translations = nil
+    end
+
+    def touch!(timestamp)
+      return if @cache_expiration_timestamp == timestamp
+
+      @cache_expiration_timestamp = timestamp
+      reload!
     end
 
     def translations

@@ -12,6 +12,7 @@ class Rosetta::StoreTest < ActiveSupport::TestCase
     assert_instance_of Rosetta::Store, @store
     assert_equal @store, refetched_store
     assert_equal @store.locale, @locale
+    assert_equal @store.cache_expiration_timestamp, @locale.updated_at
   end
 
   test "#translations returns the translations for the given locale as well as existing untranslated keys" do
@@ -35,5 +36,23 @@ class Rosetta::StoreTest < ActiveSupport::TestCase
     assert @store.translations.has_key?("missing key")
   ensure
     @store.reload!
+  end
+
+  test "touch! updates the cache expiration timestamp and reloads the store when necessary" do
+    # Load the store
+    @store.lookup("hello")
+
+    @store.touch!(@locale.updated_at + 1.day)
+    assert_equal @locale.updated_at + 1.day, @store.cache_expiration_timestamp
+    assert_nil @store.instance_variable_get(:@translations)
+  end
+
+  test "touch! does nothing if the cache is not expired" do
+    # Load the store
+    @store.lookup("hello")
+
+    @store.touch!(@locale.updated_at)
+    assert_equal @locale.updated_at, @store.cache_expiration_timestamp
+    assert_not_nil @store.instance_variable_get(:@translations)
   end
 end

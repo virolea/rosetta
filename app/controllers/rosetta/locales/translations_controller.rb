@@ -1,6 +1,6 @@
 module Rosetta
   class Locales::TranslationsController < ApplicationController
-    before_action :set_locale
+    include LocaleScoped
 
     def index
       @pagy, @translations = pagy(scope)
@@ -12,10 +12,6 @@ module Rosetta
 
     def scope
       TranslationKey.all_in_locale(@locale)
-    end
-
-    def set_locale
-      @locale = Locale.find_by!(code: params[:locale_id])
     end
   end
 end

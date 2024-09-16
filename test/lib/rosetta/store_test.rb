@@ -7,6 +7,10 @@ class Rosetta::StoreTest < ActiveSupport::TestCase
     @store = Rosetta::Store.for_locale(@locale)
   end
 
+  teardown do
+    @store.touch!(@locale.updated_at)
+  end
+
   test "self#store_for_locale returns the store instance for the given locale" do
     refetched_store = Rosetta::Store.for_locale(@locale)
     assert_instance_of Rosetta::Store, @store

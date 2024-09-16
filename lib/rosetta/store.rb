@@ -5,9 +5,7 @@ module Rosetta
     attr_reader :locale, :cache_expiration_timestamp
 
     def self.for_locale(locale)
-      store = locale_stores[locale.code.to_sym] ||= new(locale)
-      store.touch!(locale.updated_at)
-      store
+      locale_stores[locale.code.to_sym] ||= new(locale)
     end
 
     def initialize(locale)

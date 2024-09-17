@@ -15,6 +15,17 @@ module Rosetta
       locale_session.locale = code
     end
 
+    def with_locale(locale, &block)
+      locale_was = Rosetta.locale
+      self.locale = locale
+
+      begin
+        yield
+      ensure
+        self.locale = locale_was
+      end
+    end
+
     def locale_session
       Thread.current[:rosetta_locale_session] ||= LocaleSession.new
     end

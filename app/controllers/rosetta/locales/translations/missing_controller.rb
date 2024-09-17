@@ -3,7 +3,7 @@ module Rosetta
     private
 
     def scope
-      TranslationKey.with_missing_translation_in_locale(@locale)
+      super.where.missing(:translation_in_current_locale)
     end
   end
 end

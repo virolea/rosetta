@@ -47,11 +47,13 @@ module Rosetta
     private
 
     def load_translations
-      loaded_translations = TranslationKey
-        .all_in_locale(locale)
-        .map do |translation_key|
-        [ translation_key.value, translation_key.translation_value ]
-      end.to_h
+      loaded_translations = Rosetta.with_locale(@locale) do
+        TranslationKey
+          .includes(:translation_in_current_locale)
+          .map do |translation_key|
+          [ translation_key.value, translation_key.translation_in_current_locale&.value ]
+        end.to_h
+      end
 
       Concurrent::Hash.new.merge(loaded_translations)
     end

@@ -40,9 +40,8 @@
 
       <tbody class="divide-y divide-gray-200 bg-white">
         <%= render(
-          collection: @translations,
-          as: :translation_key_with_translation,
-          partial: "rosetta/locales/translations/translation_key_with_translation") %>
+          collection: @translation_keys,
+          partial: "rosetta/locales/translations/translation_key") %>
       </tbody>
     </table>
   </div>

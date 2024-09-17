@@ -1,0 +1,14 @@
+<tr class="divide-x divide-gray-200">
+  <td class="py-4 pl-4 pr-3 text-sm text-gray-900 sm:pl-6">
+    <%= translation_key.value %>
+  </td>
+  <td class="px-3 py-4 text-sm text-gray-900 group relative">
+    <%= turbo_frame_tag dom_id(translation_key) do %>
+      <%= translation_key.translation_in_current_locale&.value %>
+
+      <div class="hidden group-hover:flex absolute w-full h-full top-0 left-0 bg-indigo-50 bg-opacity-50 pr-4  items-center justify-end">
+        <%= link_to "edit", edit_translation_key_translation_path(translation_key, locale_id: @locale.id), class: "text-indigo-600 hover:text-indigo-900 font-medium" %>
+      </div>
+    <% end %>
+  </td>
+</tr>

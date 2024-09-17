@@ -1,6 +1,7 @@
 module Rosetta
   class TranslationsController < ApplicationController
-    before_action :set_locale
+    include LocaleScoped
+
     before_action :set_translation_key
     before_action :set_translation
 
@@ -8,23 +9,23 @@ module Rosetta
     end
 
     def update
-      if @translation.update(translation_params)
-        redirect_to locale_translations_path(@locale)
+      if translation_params[:value].blank?
+        @translation_key.translation_in_current_locale = nil
+      else
+        @translation.update(translation_params)
       end
+
+      render partial: "rosetta/locales/translations/translation_key", locals: { translation_key: @translation_key }
     end
 
     private
-
-    def set_locale
-      @locale = Locale.find(params[:locale_id])
-    end
 
     def set_translation_key
       @translation_key = TranslationKey.find(params[:translation_key_id])
     end
 
     def set_translation
-      @translation = @translation_key.translations.find_or_initialize_by(locale: @locale)
+      @translation = @translation_key.translation_in_current_locale || @translation_key.build_translation_in_current_locale
     end
 
     def translation_params

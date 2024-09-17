@@ -20,8 +20,8 @@ module Rosetta
       end
 
       assert_equal "Au revoir", Translation.last.value
-      assert_response :redirect
-      assert_redirected_to locale_translations_path(@locale)
+      assert_response :success
+      assert_includes response.body, @key.value
     end
 
     test "update an existing translation" do
@@ -32,8 +32,19 @@ module Rosetta
       end
 
       assert_equal "Bonjour", Translation.last.value
-      assert_response :redirect
-      assert_redirected_to locale_translations_path(@locale)
+      assert_response :success
+      assert_includes response.body, @key.value
+    end
+
+    test "setting a blank value removes the translation" do
+      Translation.create!(locale: @locale, translation_key: @key, value: "Salut")
+
+      assert_difference("Translation.count", -1) do
+        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation: { value: "" } }
+      end
+
+      assert_response :success
+      assert_includes response.body, @key.value
     end
   end
 end

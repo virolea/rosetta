@@ -3,13 +3,14 @@ module Rosetta
     extend ActiveSupport::Concern
 
     included do
-      before_action :set_locale
+      around_action :set_locale
     end
 
     private
 
-    def set_locale
-      @locale = Locale.find_by!(code: params[:locale_id])
+    def set_locale(&action)
+      @locale = Locale.find(params[:locale_id])
+      Rosetta.with_locale(@locale, &action)
     end
   end
 end

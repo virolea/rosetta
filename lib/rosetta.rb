@@ -3,6 +3,7 @@ require "rosetta/engine"
 
 require "rosetta/locale_session"
 require "rosetta/store"
+require "rosetta/configuration"
 
 module Rosetta
   module Base
@@ -20,6 +21,14 @@ module Rosetta
 
     def store
       Store.for_locale(Rosetta.locale)
+    end
+
+    def config
+      @configuration ||= Configuration.new
+    end
+
+    def configure
+      config.tap { |config| yield(config) }
     end
   end
 

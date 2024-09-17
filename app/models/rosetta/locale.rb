@@ -13,11 +13,8 @@ module Rosetta
         [ Locale.default_locale ] + all
       end
 
-      # The default locale is the locale in which the application is written.
-      # Default is english.
-      # TODO: Make this configurable.
       def default_locale
-        @default_locale ||= new(name: "English", code: "en").as_default
+        @default_locale ||= new(Rosetta.config.default_locale.to_h).as_default
       end
     end
 
@@ -26,7 +23,7 @@ module Rosetta
     end
 
     def default_locale?
-      @default ||= false
+      @default
     end
 
     def as_default

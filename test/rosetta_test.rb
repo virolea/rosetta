@@ -16,4 +16,9 @@ class RosettaTest < ActiveSupport::TestCase
   ensure
     Rosetta.locale = Rosetta::Locale.default_locale
   end
+
+  test "configuring the default locale" do
+    Rosetta.configure { |config| config.set_default_locale(name: "French", code: "fr") }
+    assert_equal "French", Rosetta.config.default_locale.name
+  end
 end

@@ -1,6 +1,6 @@
 <div class="sm:flex sm:items-center">
   <div class="sm:flex-auto">
-    <nav class="flex">
+    <nav class="flex justify-between items-center">
       <ol role="list" class="flex items-center space-x-2">
         <li>
           <%= link_to "Locales", locales_path, class: "text-base font-semibold leading-6 text-indigo-600 hover:text-indigo-900" %>
@@ -16,6 +16,8 @@
           </div>
         </li>
       </ol>
+
+      <%= button_to "Deploy locale", locale_deploys_path(@locale), class: "btn btn-primary" %>
     </nav>
 
     <p class="mt-2 text-sm text-gray-700">

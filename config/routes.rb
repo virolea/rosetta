@@ -4,6 +4,7 @@ Rosetta::Engine.routes.draw do
   resources :locales do
     scope module: :locales do
       resources :translations, only: :index
+      resources :deploys, only: :create
 
       namespace :translations do
         resources :missing, only: :index

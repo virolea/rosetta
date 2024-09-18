@@ -1,4 +1,4 @@
-class CreateRosettaTables < ActiveRecord::Migration[7.2]
+class CreateRosettaTables < ActiveRecord::Migration[6.1]
   def change
     create_table :rosetta_locales do |t|
       t.string :name

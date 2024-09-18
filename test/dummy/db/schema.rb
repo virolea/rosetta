@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_30_123523) do
+ActiveRecord::Schema.define(version: 2024_08_30_123523) do
   create_table "rosetta_locales", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.boolean "published", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_rosetta_locales_on_code", unique: true
+    t.index [ "code" ], name: "index_rosetta_locales_on_code", unique: true
   end
 
   create_table "rosetta_translation_keys", force: :cascade do |t|
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["value"], name: "index_rosetta_translation_keys_on_value", unique: true
+    t.index [ "value" ], name: "index_rosetta_translation_keys_on_value", unique: true
   end
 
   create_table "rosetta_translations", force: :cascade do |t|
@@ -33,9 +33,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_30_123523) do
     t.integer "translation_key_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["locale_id", "translation_key_id"], name: "index_rosetta_translations_on_locale_id_and_translation_key_id", unique: true
-    t.index ["locale_id"], name: "index_rosetta_translations_on_locale_id"
-    t.index ["translation_key_id"], name: "index_rosetta_translations_on_translation_key_id"
+    t.index [ "locale_id", "translation_key_id" ], name: "index_rosetta_translations_on_locale_id_and_translation_key_id", unique: true
+    t.index [ "locale_id" ], name: "index_rosetta_translations_on_locale_id"
+    t.index [ "translation_key_id" ], name: "index_rosetta_translations_on_translation_key_id"
   end
 
   add_foreign_key "rosetta_translations", "rosetta_locales", column: "locale_id"

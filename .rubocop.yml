@@ -8,3 +8,4 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 AllCops:
   Exclude:
     - "db/schema.rb"
+    - "test/dummy/db/schema.rb"

@@ -6,7 +6,6 @@ gem "puma"
 gem "sqlite3", "~> 1.4"
 gem "sprockets-rails"
 gem "rubocop-rails-omakase", require: false
-gem "appraisal"
 gem "rails", "~> 6.1.0"
 
 gemspec path: "../"

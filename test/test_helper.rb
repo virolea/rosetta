@@ -12,4 +12,11 @@ if ActiveSupport::TestCase.respond_to?(:fixture_paths=)
   ActionDispatch::IntegrationTest.fixture_paths = ActiveSupport::TestCase.fixture_paths
   ActiveSupport::TestCase.file_fixture_path = File.expand_path("fixtures", __dir__) + "/files"
   ActiveSupport::TestCase.fixtures :all
+# Note: Remove after Rails 7.0 support drop
+elsif ActiveSupport::TestCase.respond_to?(:fixture_path=)
+  ActiveSupport::TestCase.fixture_path = File.expand_path("fixtures", __dir__)
+  ActionDispatch::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
+  ActiveSupport::TestCase.file_fixture_path = ActiveSupport::TestCase.fixture_path + "/files"
+  ActiveSupport::TestCase.fixtures :all
 end
+# End Note

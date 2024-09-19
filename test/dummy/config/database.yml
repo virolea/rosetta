@@ -8,6 +8,7 @@ default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  journal_mode: off
 
 development:
   <<: *default
@@ -19,7 +20,6 @@ development:
 test:
   <<: *default
   database: storage/test.sqlite3
-
 
 # SQLite3 write its data on the local filesystem, as such it requires
 # persistent disks. If you are deploying to a managed service, you should

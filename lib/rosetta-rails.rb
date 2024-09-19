@@ -35,6 +35,10 @@ module Rosetta
       store.lookup(key)
     end
 
+    def available_locales
+      Locale.available_locales
+    end
+
     def config
       @configuration ||= Configuration.new
     end

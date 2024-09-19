@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
-  before_action :set_locale
+  around_action :set_locale
 
   private
 
   def set_locale
     if params[:locale]
-      Rosetta.locale = params[:locale]
+      Rosetta.with_locale(params[:locale]) { yield }
     end
   end
 end

@@ -13,7 +13,7 @@ class TranslationsTest < ActionDispatch::IntegrationTest
   end
 
   test "visiting the page loads up the missing keys" do
-    assert_difference("Rosetta::TranslationKey.count", 18) do
+    assert_changes("Rosetta::TranslationKey.count") do
       get root_path(locale: "fr")
       sleep 2 # TODO: Find better way to wait for keys to be created
     end

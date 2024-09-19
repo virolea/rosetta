@@ -56,7 +56,7 @@ And that's it! Run your server and visit `http://localhost:3000/rosetta` to chec
 
 ## Usage
 
-### The Default loacle
+### The Default locale
 
 The main convention Rosetta uses is that your codebase is written in the default locale. By default, it is set to English, as shown on the rosetta interface:
 

@@ -135,6 +135,9 @@ Translations can be added through the Rosetta interface. Visit the interface and
 
 Saving the new translation **will not immediately reflect in your application**. This is by desgin for performance reasons. To make new translations available in your app, click on the "deploy" button at the top of the page. Translation for the given locale will be reloaded and made available in your app.
 
+![CleanShot 2024-09-19 at 15 15 30](https://github.com/user-attachments/assets/51a9b582-b35e-4df4-a79b-1e0f238715a0)
+
+
 ### Configuring a base controller
 
 By default, Rosetta inherits from `ActionController::Base`. If you want to restrict access to the Rosetta interface, you can make Rosetta inherit from your own base controller, by configuring it in the initializer:
@@ -149,6 +152,10 @@ end
 ```
 
 **Note**: The class needs to be a string.
+
+### I18n Support 
+
+As of now, Rosetta does not integrate with the `i18n` gem as a custom backend. It might be done in the future, however it's been decided to build Rosetta independently for now. You still need to use `i18n` for backwards compatibility of your existing translations, localization, as well as the translations of gems that depend on it. 
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

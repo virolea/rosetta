@@ -1,5 +1,5 @@
 module Rosetta
-  class ApplicationController < ActionController::Base
+  class ApplicationController < Rosetta.config.parent_controller_class.constantize
     include Pagy::Backend
   end
 end

@@ -23,7 +23,7 @@ class TranslationsTest < ActionDispatch::IntegrationTest
 
     # Load up the keys
     get root_path(locale: locale.code)
-    sleep 1
+    sleep 2 # TODO: Find better way to wait for keys to be created
     key = Rosetta::TranslationKey.find_by(value: "Available locales")
 
     # Create the translation

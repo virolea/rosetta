@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors     = [ "Vincent Rolea" ]
   spec.email       = [ "3525369+virolea@users.noreply.github.com" ]
   spec.homepage    = "https://github.com/virolea/rosetta"
-  spec.summary     = "Modern and developer-friendly Internationalization solution for Rails applications."
+  spec.summary     = "Unobstrusive Internationalization solution for Rails applications."
   spec.description = spec.summary
   spec.license     = "MIT"
 

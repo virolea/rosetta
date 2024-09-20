@@ -32,6 +32,7 @@ A real-life example speaking louder than words, here is a comparison between the
 |Base translations||0.1.1|
 |Pluralization API|https://github.com/virolea/rosetta/issues/5||
 |Context API|https://github.com/virolea/rosetta/issues/6||
+|Interpolation API|https://github.com/virolea/rosetta/issues/8||
 
 ## Installation
 Add this line to your application's Gemfile:

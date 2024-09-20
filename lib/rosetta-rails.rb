@@ -9,6 +9,13 @@ require "rosetta/translated"
 require "rosetta/translated/create"
 require "rosetta/translated/delete"
 
+require "rosetta/pluralization/base_operator"
+require "rosetta/pluralization/operators/less_than_or_equal_to"
+require "rosetta/pluralization/operators/less_than"
+require "rosetta/pluralization/operators/equal_to"
+require "rosetta/pluralization/operators/greater_than_or_equal_to"
+require "rosetta/pluralization/operators/greater_than"
+
 module Rosetta
   module Base
     def locale

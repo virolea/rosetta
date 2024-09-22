@@ -21,7 +21,10 @@ elsif ActiveSupport::TestCase.respond_to?(:fixture_path=)
 end
 # End Note
 
-# Test without parallelization
 class ActiveSupport::TestCase
-  parallelize(workers: 1)
+  # Clean up locale stores and reset the current locale before each test
+  setup do
+    Rosetta::Store.locale_stores.each { |code, store| store.reload! }
+    Rosetta.locale = :en
+  end
 end

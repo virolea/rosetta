@@ -20,3 +20,8 @@ elsif ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.fixtures :all
 end
 # End Note
+
+# Test without parallelization
+class ActiveSupport::TestCase
+  parallelize(workers: 1)
+end

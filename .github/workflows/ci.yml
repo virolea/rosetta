@@ -32,8 +32,26 @@ jobs:
           - rails_7_1
           - rails_7_2
 
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: rosetta_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/rosetta_test
+      RAILS_ENV: test
+
     steps:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libsqlite3-0 libvips
@@ -48,9 +66,6 @@ jobs:
           bundler-cache: true
 
       - name: Run tests
-        env:
-          RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
         run: |
           bin/rails db:test:prepare
           bin/rails test

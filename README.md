@@ -66,21 +66,16 @@ And that's it! Run your server and visit `http://localhost:3000/rosetta` to chec
 
 ### The Default locale
 
-The main convention Rosetta uses is that your codebase is written in the default locale. By default, it is set to English, as shown on the rosetta interface:
+> [!NOTE]
+> By convention in Rosetta, the default locale should be the locale your codebase is written into. This, in theory should not change once it is set.
+
+The first time you visit the Rosetta interface, you will be prompted to set the default locale:
+
+![CleanShot 2024-09-23 at 15 36 40](https://github.com/user-attachments/assets/6d088837-89ac-4742-b5b7-00a7db8f9c2b)
+
+Enter the name and the code for the locale your codebase is written into (probably English and `en` in most cases) and submit the form. You will be redirected to the rosetta homepage where your default locale will appear.
 
 ![CleanShot 2024-09-19 at 18 01 55](https://github.com/user-attachments/assets/678fad1d-64cd-463d-8c21-9a166abca715)
-
-If your codebase is written in another language - say French - you can update the default locale in the Rosetta initializer:
-
-```ruby
-# config/initializers/rosetta.rb
-
-Rosetta.configure do |config|
-  config.set_default_locale(name: "French", code: "fr")
-end
-```
-
-A locale is defined by a name and a code. The name is the human-readable name of the locale, while the code can be any combination of letters separated by a dash, like `en-GB`, `fr` and so on.
 
 ### Adding a locale
 
@@ -158,7 +153,6 @@ By default, Rosetta inherits from `ActionController::Base`. If you want to restr
 # config/initializers/rosetta.rb
 
 Rosetta.configure do |config|
-  # config.set_default_locale(name: "French", code: "fr")
   config.parent_controller_class = "AdminController"
 end
 ```

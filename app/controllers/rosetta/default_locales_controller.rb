@@ -19,7 +19,7 @@ module Rosetta
     private
 
     def ensure_configuration_needed
-      redirect_to root_path if Locale.any?
+      redirect_to root_path if Locale.default_locale
     end
 
     def locale_params

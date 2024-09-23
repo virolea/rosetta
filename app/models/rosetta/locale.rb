@@ -20,6 +20,10 @@ module Rosetta
       def default_locale
         @default_locale ||= find_by(default: true)
       end
+
+      def default_locale=(locale)
+        @default_locale = locale
+      end
     end
   end
 end

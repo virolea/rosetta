@@ -6,6 +6,7 @@ module Rosetta
 
     setup do
       Locale.destroy_all
+      Locale.default_locale = nil
     end
 
     test "new" do
@@ -23,7 +24,8 @@ module Rosetta
     end
 
     test "redirects if the default locale already exists" do
-      Locale.create(name: "English", code: "en")
+      locale = Locale.create(name: "English", code: "en")
+      Locale.default_locale = locale
 
       assert_no_difference("Locale.count") do
         post default_locale_path, params: { locale: { name: "English", code: "en" } }

@@ -27,7 +27,7 @@ module Rosetta
     private
 
     def ensure_default_locale_exists
-      redirect_to new_default_locale_path if Locale.none?
+      redirect_to new_default_locale_path unless Locale.default_locale
     end
 
     def locale_params

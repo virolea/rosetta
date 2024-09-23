@@ -12,7 +12,6 @@ module Rosetta
 
     test "redirects to the new default locale if no locale" do
       Locale.destroy_all
-      Locale.default_locale = nil
       get locales_path
       assert_redirected_to new_default_locale_path
     end

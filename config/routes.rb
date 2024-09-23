@@ -1,6 +1,8 @@
 Rosetta::Engine.routes.draw do
   root to: "locales#index"
 
+  resource :default_locale, only: %i[new create]
+
   resources :locales do
     scope module: :locales do
       resources :translations, only: :index

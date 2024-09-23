@@ -15,7 +15,7 @@ class TranslationsTest < ActionDispatch::IntegrationTest
   end
 
   test "visiting the page syncs up the missing keys" do
-    assert_enqueued_jobs 18 do
+    assert_enqueued_jobs 19 do
       get root_path(locale: "fr")
     end
   end

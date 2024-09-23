@@ -10,10 +10,17 @@
   </div>
 
   <div>
+    <h3 class="text-lg font-semibold"><%= _ "Default locale" %></h3>
+    <div>
+      <%= _ Rosetta::Locale.default_locale&.name %>
+    </div>
+  </div>
+
+  <div>
     <h3 class="text-lg font-semibold"><%= _ "Available locales" %></h3>
     <ul class="list-disc pl-4">
       <% Rosetta::Locale.available_locales.each do |locale| %>
-        <li><%= _ locale.name %> <%= "(#{_ "default"})" if locale.default_locale?  %> - <%= link_to _("Switch"), root_path(locale: locale.code), class: "text-blue-500 hover:underline" %></li>
+        <li><%= _ locale.name %> <%= "(#{_ "default"})" if locale.default?  %> - <%= link_to _("Switch"), root_path(locale: locale.code), class: "text-blue-500 hover:underline" %></li>
       <% end %>
     </ul>
   </div>

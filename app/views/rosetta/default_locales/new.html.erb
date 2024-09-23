@@ -1,0 +1,54 @@
+<h1 class="text-3xl font-bold">
+  Setup default locale
+</h1>
+
+<div class="rounded-md bg-blue-50 p-4 mt-8">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="ml-3">
+      <h3 class="font-medium text-blue-800">Rosetta needs a default locale set up to work properly</h3>
+
+      <p class="text-sm text-blue-700 mt-2">
+        The default locale is the locale the codebase is written in. It is not supposed to change in the future, though it can be edited if needed later on.
+      </p>
+    </div>
+  </div>
+</div>
+
+<%= form_with model: @locale, url: default_locale_path, class: "grid gap-2 mt-8" do |f| %>
+  <% if @locale.errors[:code].any? %>
+    <div class="rounded-md bg-red-50 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <div class="text-sm text-red-700">
+            Please check the format of your locale code, and make sure it does not already exist.
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, class: "label" %>
+    <%= f.text_field :name, placeholder: "E.g. English", class: "input max-w-xs", required: true %>
+  </div>
+
+  <div>
+    <%= f.label :code, class: "label" %>
+    <%= f.text_field :code, placeholder: "E.g. en", class: "input max-w-28", required: true  %>
+    <p class="mt-1 text-sm leading-6 text-gray-600">
+      Downcase letters followed by an optional region specifier in uppercase letters, separated by a dash. E.g. <span class="badge">fr</span> or <span class="badge">en-GB</span>.
+    </p>
+  </div>
+
+  <%= f.submit "Setup default locale", class: "btn btn-primary mt-2" %>
+<% end %>

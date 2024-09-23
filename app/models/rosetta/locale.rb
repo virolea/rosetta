@@ -10,22 +10,20 @@ module Rosetta
 
     class << self
       def available_locales
-        [ Locale.default_locale ] + all
+        all
+      end
+
+      def build_as_default(params)
+        new(params.merge(default: true))
       end
 
       def default_locale
-        @default_locale ||= new(Rosetta.config.default_locale.to_h).as_default
+        @default_locale ||= find_by(default: true)
       end
-    end
 
-    def default_locale?
-      @default
-    end
-
-    def as_default
-      @default = true
-      readonly!
-      self
+      def default_locale=(locale)
+        @default_locale = locale
+      end
     end
   end
 end

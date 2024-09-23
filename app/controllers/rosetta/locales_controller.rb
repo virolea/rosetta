@@ -1,7 +1,9 @@
 module Rosetta
   class LocalesController < ApplicationController
+    before_action :ensure_default_locale_exists, only: :index
+
     def index
-      @locales = [ Locale.default_locale ] + Locale.all
+      @locales = Locale.order(default: :desc)
     end
 
     def new
@@ -23,6 +25,10 @@ module Rosetta
     end
 
     private
+
+    def ensure_default_locale_exists
+      redirect_to new_default_locale_path unless Locale.default_locale
+    end
 
     def locale_params
       params.require(:locale).permit(:name, :code)

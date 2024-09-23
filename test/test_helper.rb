@@ -22,9 +22,12 @@ end
 # End Note
 
 class ActiveSupport::TestCase
-  # Clean up locale stores and reset the current and default locales before each test
+  # Provide a clean slate for each test:
+  # - Unset the default locale
+  # - Reload all locale stores
+  # - Set the locale to the default locale
   setup do
-    Rosetta.configure { |config| config.set_default_locale(name: "English", code: "en") }
+    Rosetta::Locale.default_locale = nil
     Rosetta::Store.locale_stores.each { |code, store| store.reload! }
     Rosetta.locale = :en
   end

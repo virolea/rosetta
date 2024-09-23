@@ -1,3 +1,8 @@
+english:
+  name: English
+  code: en
+  default: true
+
 french:
   name: French
   code: fr

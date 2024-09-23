@@ -2,39 +2,39 @@ require "test_helper"
 
 class Rosetta::LocaleTest < ActiveSupport::TestCase
   test "valid locale" do
-    assert Rosetta::Locale.new(name: "English", code: "en").valid?
+    assert Rosetta::Locale.new(name: "Italian", code: "it").valid?
   end
 
   test "default unpublished" do
-    assert_not Rosetta::Locale.new(name: "English", code: "en").published
+    assert_not Rosetta::Locale.new(name: "Italian", code: "it").published
   end
 
   test "invalid without a name" do
-    locale = Rosetta::Locale.new(name: nil, code: "en")
+    locale = Rosetta::Locale.new(name: nil, code: "it")
     locale.valid?
     assert_not locale.errors[:name].empty?
   end
 
   test "invalid without a code" do
-    locale = Rosetta::Locale.new(name: "English", code: nil)
+    locale = Rosetta::Locale.new(name: "Italian", code: nil)
     locale.valid?
     assert_not locale.errors[:code].empty?
   end
 
   test "invalid with a duplicate code" do
-    Rosetta::Locale.create(name: "English", code: "en")
-    locale = Rosetta::Locale.new(name: "English", code: "en")
+    Rosetta::Locale.create(name: "Italian", code: "it")
+    locale = Rosetta::Locale.new(name: "Italian", code: "it")
     locale.valid?
     assert_not locale.errors[:code].empty?
   end
 
   test "code format" do
-    assert     Rosetta::Locale.new(name: "English", code: "en").valid?
-    assert     Rosetta::Locale.new(name: "English", code: "EN").valid?
-    assert     Rosetta::Locale.new(name: "English", code: "en-GB").valid?
-    assert     Rosetta::Locale.new(name: "English", code: "EN-gb").valid?
-    assert_not Rosetta::Locale.new(name: "English", code: "en-GB-UK").valid?
-    assert_not Rosetta::Locale.new(name: "English", code: "qw12").valid?
+    assert     Rosetta::Locale.new(name: "Italian", code: "it").valid?
+    assert     Rosetta::Locale.new(name: "Italian", code: "IT").valid?
+    assert     Rosetta::Locale.new(name: "Italian", code: "it-IT").valid?
+    assert     Rosetta::Locale.new(name: "Italian", code: "IT-it").valid?
+    assert_not Rosetta::Locale.new(name: "Italian", code: "it-IT-IT").valid?
+    assert_not Rosetta::Locale.new(name: "Italian", code: "qw12").valid?
   end
 
   test "available locales" do
@@ -46,7 +46,6 @@ class Rosetta::LocaleTest < ActiveSupport::TestCase
     default_locale = Rosetta::Locale.default_locale
     assert_equal "English", default_locale.name
     assert_equal "en", default_locale.code
-    assert default_locale.default_locale?
-    assert default_locale.readonly?
+    assert default_locale.default?
   end
 end

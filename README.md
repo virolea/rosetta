@@ -148,7 +148,9 @@ Saving the new translation **will not immediately reflect in your application**.
 ![CleanShot 2024-09-19 at 15 15 30](https://github.com/user-attachments/assets/51a9b582-b35e-4df4-a79b-1e0f238715a0)
 
 
-### Configuring a base controller
+### Configuration
+
+#### Configuring a base controller
 
 By default, Rosetta inherits from `ActionController::Base`. If you want to restrict access to the Rosetta interface, you can make Rosetta inherit from your own base controller, by configuring it in the initializer:
 
@@ -163,9 +165,21 @@ end
 
 **Note**: The class name needs to be a string.
 
-### I18n Support 
+#### Setting up the queue for the Autodiscovery Job
 
-As of now, Rosetta does not integrate with the `i18n` gem as a custom backend. It might be done in the future, however it's been decided to build Rosetta independently for now. You still need to use `i18n` for backwards compatibility of your existing translations, localization, as well as the translations of gems that depend on it. 
+Rosetta uses a background job to automatically discover new translations in your codebase. It enqueues jobs in the queue set by default. To configure it to target another queue:
+
+```ruby
+# config/initializers/rosetta.rb
+
+Rosetta.configure do |config|
+  config.queues[:autodiscovery] = "low_priority"
+end
+```
+
+### I18n Support
+
+As of now, Rosetta does not integrate with the `i18n` gem as a custom backend. It might be done in the future, however it's been decided to build Rosetta independently for now. You still need to use `i18n` for backwards compatibility of your existing translations, localization, as well as the translations of gems that depend on it.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

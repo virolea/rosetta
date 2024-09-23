@@ -1,6 +1,6 @@
 module Rosetta
   class AutodiscoveryJob < Rosetta::ApplicationJob
-    queue_as :default
+    queue_as { Rosetta.config.queues[:autodiscovery] }
 
     discard_on ActiveRecord::RecordNotUnique
 

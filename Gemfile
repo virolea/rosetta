@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 gem "puma"
-gem "sqlite3"
+gem "pg"
 gem "sprockets-rails"
 gem "rubocop-rails-omakase", require: false
 # Start debugger with binding.b [https://github.com/ruby/debug]

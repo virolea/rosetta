@@ -13,8 +13,6 @@ class RosettaTest < ActiveSupport::TestCase
     locale = Rosetta::Locale.new(name: "French", code: "fr")
     Rosetta.locale = locale
     assert_equal Rosetta.locale, locale
-  ensure
-    Rosetta.locale = Rosetta::Locale.default_locale
   end
 
   test "#with_locale" do

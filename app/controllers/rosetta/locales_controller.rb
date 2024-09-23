@@ -3,7 +3,7 @@ module Rosetta
     before_action :ensure_default_locale_exists, only: :index
 
     def index
-      @locales = Locale.all
+      @locales = Locale.order(default: :desc)
     end
 
     def new

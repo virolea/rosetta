@@ -2,6 +2,8 @@ require "test_helper"
 require "minitest/mock"
 
 class Rosetta::StoreTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @locale = rosetta_locales(:french)
     @store = Rosetta::Store.for_locale(@locale)
@@ -31,10 +33,9 @@ class Rosetta::StoreTest < ActiveSupport::TestCase
     assert_nil @store.lookup("goodbye")
   end
 
-  test "looking up a key that doesn't exist creates a new key and adds the key to the translations" do
-    assert_difference("Rosetta::TranslationKey.count", 1) do
+  test "looking up a key that doesn't exist enqueues a new key creation and adds the key to the translations" do
+    assert_enqueued_with(job: Rosetta::AutodiscoveryJob, args: [ "missing key" ]) do
       @store.lookup("missing key")
-      sleep 1
     end
 
     assert @store.translations.has_key?("missing key")

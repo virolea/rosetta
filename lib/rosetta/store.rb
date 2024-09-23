@@ -13,16 +13,13 @@ module Rosetta
     def initialize(locale)
       @locale = locale
       @cache_expiration_timestamp = @locale.updated_at
-      @autodiscovery_queue = Queue.new
-
-      start_key_autodiscovery!
     end
 
     def lookup(key_value)
       if translations.has_key?(key_value)
         translations[key_value]
       else
-        @autodiscovery_queue << key_value
+        TranslationKey.create_later(key_value)
         # Set the key in the translations store to locate it
         # once only.
         translations[key_value] = nil
@@ -56,20 +53,6 @@ module Rosetta
       end
 
       Concurrent::Hash.new.merge(loaded_translations)
-    end
-
-    def start_key_autodiscovery!
-      Thread.new do
-        Thread.current.name = "Rosetta #{locale.code} store thread"
-
-        loop do
-          key_value = @autodiscovery_queue.pop
-
-          unless TranslationKey.exists?(value: key_value)
-            TranslationKey.create!(value: key_value)
-          end
-        end
-      end
     end
   end
 end

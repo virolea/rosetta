@@ -1,6 +1,8 @@
 require "test_helper"
 
 class TranslationsTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   teardown do
     Rosetta::Store.for_locale(rosetta_locales(:french)).reload!
   end
@@ -12,20 +14,15 @@ class TranslationsTest < ActionDispatch::IntegrationTest
     assert_select "h3", "bonjour"
   end
 
-  test "visiting the page loads up the missing keys" do
-    assert_changes("Rosetta::TranslationKey.count") do
+  test "visiting the page syncs up the missing keys" do
+    assert_enqueued_jobs 18 do
       get root_path(locale: "fr")
-      sleep 2 # TODO: Find better way to wait for keys to be created
     end
   end
 
   test "deploying a new translation" do
     locale = rosetta_locales(:french)
-
-    # Load up the keys
-    get root_path(locale: locale.code)
-    sleep 2 # TODO: Find better way to wait for keys to be created
-    key = Rosetta::TranslationKey.find_by(value: "Available locales")
+    key = Rosetta::TranslationKey.create(value: "Available locales")
 
     # Create the translation
     patch rosetta.translation_key_translation_path(key), params: { locale_id: locale.id, translation: { value: "Langues disponibles" } }

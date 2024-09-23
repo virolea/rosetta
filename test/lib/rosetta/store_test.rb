@@ -38,8 +38,6 @@ class Rosetta::StoreTest < ActiveSupport::TestCase
     end
 
     assert @store.translations.has_key?("missing key")
-  ensure
-    @store.reload!
   end
 
   test "touch! updates the cache expiration timestamp and reloads the store when necessary" do

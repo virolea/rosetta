@@ -27,6 +27,9 @@ A real-life example speaking louder than words, here is a comparison between the
 
 ## Roadmap
 
+> [!WARNING]
+> Rosetta is still early in its development, and is subject to breaking changes even on minor version updates. Please refer to the [releases section]([url](https://github.com/virolea/rosetta/releases)) for more information.
+
 |Feature|tracking|released|
 |--|--|--
 |Base translations||0.1.1|

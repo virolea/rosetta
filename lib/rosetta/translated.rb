@@ -11,6 +11,8 @@ module Rosetta
         Locale.all.each do |locale|
           translated_in(locale)
         end
+
+        Locale.register_class_for_translation(self)
       end
 
       def translated_in(locale)

@@ -16,7 +16,7 @@ module Rosetta
 
     test "add a new translation" do
       assert_difference("Translation.count", 1) do
-        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation: { value: "Au revoir" } }
+        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation_key: { value_fr: "Au revoir" } }
       end
 
       assert_equal "Au revoir", Translation.last.value
@@ -28,7 +28,7 @@ module Rosetta
       Translation.create!(locale: @locale, translation_key: @key, value: "Salut")
 
       assert_no_difference("Translation.count") do
-        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation: { value: "Bonjour" } }
+        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation_key: { value_fr: "Bonjour" } }
       end
 
       assert_equal "Bonjour", Translation.last.value
@@ -40,7 +40,7 @@ module Rosetta
       Translation.create!(locale: @locale, translation_key: @key, value: "Salut")
 
       assert_difference("Translation.count", -1) do
-        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation: { value: "" } }
+        patch translation_key_translation_path(@key), params: { locale_id: @locale.id, translation_key: { value_fr: "" } }
       end
 
       assert_response :success

@@ -20,11 +20,33 @@ module Rosetta
 
         scope :with_translation, ->(locale) { includes(:"#{locale.code}_translation") }
         scope :with_missing_translation, ->(locale) { with_translation(locale).where.missing(:"#{locale.code}_translation") }
+
+        define_method("value_#{locale.code}") do
+          if translation_changes[locale.code]
+            translation_changes[locale.code].value
+          else
+            public_send(:"#{locale.code}_translation")&.value
+          end
+        end
+
+        define_method("value_#{locale.code}=") do |locale_value|
+          translation_changes[locale.code] = if locale_value.blank?
+            Rosetta::Translated::Delete.new(self, locale)
+          else
+            Rosetta::Translated::Create.new(self, locale, locale_value)
+          end
+        end
+
+        after_save { translation_changes[locale.code]&.save }
       end
     end
 
-    def translation_in(locale)
-      public_send(:"#{locale.code}_translation")
+    def translation_changes
+      @translation_changes ||= {}
+    end
+
+    def reload(*)
+      super.tap { @translation_changes = nil }
     end
   end
 end

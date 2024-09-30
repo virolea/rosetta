@@ -1,10 +1,10 @@
 <%= turbo_frame_tag dom_id(@translation_key) do %>
-  <%= form_with model: @translation, url: translation_key_translation_path(@translation_key), method: :patch, class: "relative" do |f| %>
+  <%= form_with model: @translation_key, url: translation_key_translation_path(@translation_key), method: :patch, class: "relative" do |f| %>
     <%= hidden_field_tag :locale_id, @locale.id %>
 
     <div class="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-      <%= f.label :value, "Translation", class: "sr-only" %>
-      <%= f.text_area :value, row: 3, autofocus: true, placeholder: "Enter your translation", class: "block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
+      <%= f.label :"value_#{@locale.code}", "Translation", class: "sr-only" %>
+      <%= f.text_area :"value_#{@locale.code}", row: 3, autofocus: true, placeholder: "Enter your translation", class: "block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" %>
 
       <div class="py-2" aria-hidden="true">
         <div class="py-px">

@@ -11,7 +11,7 @@ module Rosetta
     private
 
     def scope
-      TranslationKey.includes(:translation_in_current_locale)
+      TranslationKey.with_translation(@locale)
     end
   end
 end

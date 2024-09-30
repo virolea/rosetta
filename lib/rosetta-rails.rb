@@ -5,6 +5,8 @@ require "rosetta/locale_session"
 require "rosetta/store"
 require "rosetta/configuration"
 
+require "rosetta/translated"
+
 module Rosetta
   module Base
     def locale

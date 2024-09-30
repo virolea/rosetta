@@ -10,7 +10,7 @@ module Rosetta
 
     def update
       if translation_params[:value].blank?
-        @translation_key.translation_in_current_locale = nil
+        @translation_key.public_send(:"#{@locale.code}_translation=", nil)
       else
         @translation.update(translation_params)
       end
@@ -25,7 +25,8 @@ module Rosetta
     end
 
     def set_translation
-      @translation = @translation_key.translation_in_current_locale || @translation_key.build_translation_in_current_locale
+      @translation = @translation_key.public_send(:"#{@locale.code}_translation") ||
+        @translation_key.public_send(:"build_#{@locale.code}_translation")
     end
 
     def translation_params

@@ -46,9 +46,9 @@ module Rosetta
     def load_translations
       loaded_translations = Rosetta.with_locale(@locale) do
         TranslationKey
-          .includes(:translation_in_current_locale)
+          .with_translation(@locale)
           .map do |translation_key|
-          [ translation_key.value, translation_key.translation_in_current_locale&.value ]
+          [ translation_key.value, translation_key.public_send(:"#{@locale.code}_translation")&.value ]
         end.to_h
       end
 

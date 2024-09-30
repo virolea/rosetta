@@ -1,4 +1,5 @@
 require "test_helper"
+require "minitest/mock"
 
 class Rosetta::LocaleTest < ActiveSupport::TestCase
   test "valid locale" do
@@ -47,5 +48,15 @@ class Rosetta::LocaleTest < ActiveSupport::TestCase
     assert_equal "English", default_locale.name
     assert_equal "en", default_locale.code
     assert default_locale.default?
+  end
+
+  test "creating a new locale notifies translated models" do
+    translated_model = Minitest::Mock.new
+    translated_model.expect(:translated_in, nil, [ Rosetta::Locale ])
+
+    Rosetta::Locale.register_class_for_translation(translated_model)
+    Rosetta::Locale.create(name: "Italian", code: "it")
+
+    assert translated_model.verify
   end
 end

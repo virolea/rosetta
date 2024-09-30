@@ -1,5 +1,7 @@
 module Rosetta
   class Locale < ApplicationRecord
+    class_attribute :registered_classes_for_translations, default: []
+
     CODE_FORMAT = /\A[a-zA-Z]+(-[a-zA-Z]+)?\z/
 
     validates :name, :code, presence: true
@@ -7,6 +9,8 @@ module Rosetta
     validates :code, format: { with: CODE_FORMAT, message: "must only contain letters separated by an optional dash" }
 
     has_many :translations, dependent: :destroy
+
+    after_create_commit :notify_translated_models
 
     class << self
       def available_locales
@@ -24,6 +28,13 @@ module Rosetta
       def default_locale=(locale)
         @default_locale = locale
       end
+      def register_class_for_translation(klass)
+        registered_classes_for_translations << klass
+      end
+    end
+
+    def notify_translated_models
+      registered_classes_for_translations.each { |klass| klass.translated_in(self) }
     end
   end
 end

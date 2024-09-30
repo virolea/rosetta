@@ -1,3 +1,5 @@
+[![CI](https://github.com/virolea/rosetta/actions/workflows/ci.yml/badge.svg)](https://github.com/virolea/rosetta/actions/workflows/ci.yml)
+
 # Rosetta
 
 Rosetta is a Rails engine proviving a full-fledged internationalization (i18n) solution for your Rails application. It is designed with the following principles in mind:

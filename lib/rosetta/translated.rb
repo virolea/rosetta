@@ -2,8 +2,13 @@ module Rosetta
   module Translated
     extend ActiveSupport::Concern
 
+    included do
+      scope :missing_translation, ->(locale) { where.missing(:"#{locale.code}_translation") }
+      scope :with_translated_version, ->(locale) { includes(:"#{locale.code}_translated_version") }
+    end
+
     class_methods do
-      def translated_in_all_locales
+      def translate_in_all_locales
         Locale.all.each do |locale|
           translated_in(locale)
         end
@@ -14,9 +19,6 @@ module Rosetta
       def translated_in(locale)
         has_one :"#{locale.code}_translation", -> { where(target_locale: locale) }, class_name: "Rosetta::Translation", foreign_key: :from_id, dependent: :destroy
         has_one :"#{locale.code}_translated_version", through: :"#{locale.code}_translation", source: :to
-
-        scope :missing_translation, ->(locale) { where.missing(:"#{locale.code}_translation") }
-        scope :with_translated_version, ->(locale) { includes(:"#{locale.code}_translated_version") }
 
         define_method("content_#{locale.code}") do
           if translation_changes[locale.code]

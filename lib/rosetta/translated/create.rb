@@ -31,7 +31,7 @@ module Rosetta
     end
 
     def build_translated_version
-      TextEntry.build(locale: @locale, content: @content)
+      TextEntry.new(locale: @locale, content: @content)
     end
   end
 end

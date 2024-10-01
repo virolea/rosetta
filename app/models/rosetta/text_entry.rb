@@ -2,9 +2,9 @@ module Rosetta
   class TextEntry < ApplicationRecord
     include Translated
 
-    belongs_to :locale
+    translate_in_all_locales
 
-    translated_in_all_locales
+    belongs_to :locale
 
     def self.create_later(content)
       AutodiscoveryJob.perform_later(content)

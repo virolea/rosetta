@@ -15,14 +15,14 @@ module Rosetta
       @cache_expiration_timestamp = @locale.updated_at
     end
 
-    def lookup(key_value)
-      if translations.has_key?(key_value)
-        translations[key_value]
+    def lookup(content)
+      if translations.has_key?(content)
+        translations[content]
       else
-        TranslationKey.create_later(key_value)
+        TextEntry.create_later(content)
         # Set the key in the translations store to locate it
         # once only.
-        translations[key_value] = nil
+        translations[content] = nil
       end
     end
 
@@ -44,13 +44,12 @@ module Rosetta
     private
 
     def load_translations
-      loaded_translations = Rosetta.with_locale(@locale) do
-        TranslationKey
-          .with_translation(@locale)
-          .map do |translation_key|
-          [ translation_key.value, translation_key.public_send(:"#{@locale.code}_translation")&.value ]
-        end.to_h
-      end
+      loaded_translations = TextEntry
+        .with_translated_version(@locale)
+        .where(locale: Rosetta::Locale.default_locale)
+        .map do |text_entry|
+        [ text_entry.content, text_entry.public_send(:"#{@locale.code}_translated_version")&.content ]
+      end.to_h
 
       Concurrent::Hash.new.merge(loaded_translations)
     end

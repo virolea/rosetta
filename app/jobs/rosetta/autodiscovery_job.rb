@@ -4,8 +4,8 @@ module Rosetta
 
     discard_on ActiveRecord::RecordNotUnique
 
-    def perform(value)
-      TranslationKey.create!(value: value)
+    def perform(content)
+      TextEntry.create!(content: content, locale: Locale.default_locale)
     end
   end
 end

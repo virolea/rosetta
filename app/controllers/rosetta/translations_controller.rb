@@ -2,25 +2,25 @@ module Rosetta
   class TranslationsController < ApplicationController
     include LocaleScoped
 
-    before_action :set_translation_key
+    before_action :set_text_entry
 
     def edit
     end
 
     def update
-      @translation_key.update(translation_key_params)
+      @text_entry.update(text_entry_params)
 
-      render partial: "rosetta/locales/translations/translation_key", locals: { translation_key: @translation_key }
+      render partial: "rosetta/text_entries/text_entry_with_translation", locals: { text_entry: @text_entry }
     end
 
     private
 
-    def set_translation_key
-      @translation_key = TranslationKey.find(params[:translation_key_id])
+    def set_text_entry
+      @text_entry = TextEntry.find(params[:text_entry_id])
     end
 
-    def translation_key_params
-      params.require(:translation_key).permit(:"value_#{@locale.code}")
+    def text_entry_params
+      params.require(:text_entry).permit(:"content_#{@locale.code}")
     end
   end
 end

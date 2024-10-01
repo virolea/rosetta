@@ -5,7 +5,7 @@ hello:
   locale: english
 
 bonjour:
-  content: hello
+  content: bonjour
   locale: french
 
 hola:

@@ -14,7 +14,7 @@ Rosetta::Engine.routes.draw do
     end
   end
 
-  resources :translation_keys do
+  resources :text_entries do
     resource :translation, only: %i[edit update]
   end
 end

@@ -4,29 +4,31 @@ class Rosetta::TranslatedTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   test "setting a new translation" do
-    translation_key = rosetta_translation_keys(:goodbye)
-    translation_key.update(value_fr: "au revoir")
-    translation_key.reload
+    text_entry = rosetta_text_entries(:goodbye)
+    text_entry.update(content_fr: "au revoir")
+    text_entry.reload
 
-    assert_equal "au revoir", translation_key.value_fr
-    assert_not_nil translation_key.fr_translation
+    assert_equal "au revoir", text_entry.content_fr
+    assert_not_nil text_entry.fr_translation
+  end
+
+  test "setting a new translation to an existing entry does not create a new entry" do
+    text_entry = Rosetta::TextEntry.create(content: "good morning", locale: rosetta_locales(:english))
+
+    assert_no_difference "Rosetta::TextEntry.count" do
+      text_entry.update(content_fr: "bonjour")
+    end
+
+    assert_equal "bonjour", text_entry.reload.content_fr
   end
 
   test "setting a translation to blank removes the translation" do
-    translation_key = rosetta_translation_keys(:hello)
+    text_entry = rosetta_text_entries(:hello)
 
-    translation_key.update(value_fr: "")
-    translation_key.reload
+    text_entry.update(content_fr: "")
+    text_entry.reload
 
-    assert_nil translation_key.value_fr
-    assert_nil translation_key.fr_translation
-  end
-
-  test "setting a translation without saving returns the updated translation" do
-    translation_key = rosetta_translation_keys(:hello)
-    translation_key.value_fr = "salut"
-
-    assert_equal "salut", translation_key.value_fr
-    assert_equal "bonjour", translation_key.reload.value_fr
+    assert_nil text_entry.content_fr
+    assert_nil text_entry.fr_translation
   end
 end

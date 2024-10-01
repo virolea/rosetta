@@ -33,15 +33,16 @@
     <table class="min-w-full divide-y divide-gray-300">
       <thead class="bg-gray-50">
         <tr class="divide-x divide-gray-200">
-          <th scope="col" class="w-1/2 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Translation Key</th>
+          <th scope="col" class="w-1/2 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Text Entry</th>
           <th scope="col" class="w-1/2 px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Translation</th>
         </tr>
       </thead>
 
       <tbody class="divide-y divide-gray-200 bg-white">
         <%= render(
-          collection: @translation_keys,
-          partial: "rosetta/locales/translations/translation_key") %>
+          collection: @text_entries,
+          as: :text_entry,
+          partial: "rosetta/text_entries/text_entry_with_translation") %>
       </tbody>
     </table>
   </div>

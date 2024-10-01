@@ -1,11 +1,11 @@
 module Rosetta
   class Translated::Delete
-    attr_reader :value
+    attr_reader :content
 
     def initialize(record, locale)
       @record = record
       @locale = locale
-      @value = nil
+      @content = nil
     end
 
     def save

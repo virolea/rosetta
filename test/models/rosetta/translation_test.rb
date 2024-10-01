@@ -4,10 +4,9 @@ module Rosetta
   class TranslationTest < ActiveSupport::TestCase
     test "Adding the same translation twice raises" do
       locale = rosetta_locales(:french)
-      key = rosetta_translation_keys(:hello)
 
       assert_raises ActiveRecord::RecordNotUnique do
-        Rosetta::Translation.create(locale: locale, translation_key: key, value: "bonjour x2")
+        Rosetta::Translation.create(target_locale: locale, from: rosetta_text_entries(:hello), to: rosetta_text_entries(:bonjour))
       end
     end
   end

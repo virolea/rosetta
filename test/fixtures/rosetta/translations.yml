@@ -1,9 +1,9 @@
 hello_from_english_to_french:
   from: hello
   to: bonjour
-  locale_code: fr
+  target_locale: french
 
 hello_from_english_to_spanish:
   from: hello
   to: hola
-  locale_code: es
+  target_locale: spanish

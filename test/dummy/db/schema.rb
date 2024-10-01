@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_23_100651) do
+ActiveRecord::Schema.define(version: 2024_09_30_135810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2024_09_23_100651) do
     t.index ["code"], name: "index_rosetta_locales_on_code", unique: true
   end
 
+  create_table "rosetta_text_entries", force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "locale_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content"], name: "index_rosetta_text_entries_on_content"
+    t.index ["locale_id", "content"], name: "index_rosetta_text_entries_on_locale_id_and_content", unique: true
+    t.index ["locale_id"], name: "index_rosetta_text_entries_on_locale_id"
+  end
+
   create_table "rosetta_translation_keys", force: :cascade do |t|
     t.text "value"
     t.datetime "created_at", null: false
@@ -32,16 +42,19 @@ ActiveRecord::Schema.define(version: 2024_09_23_100651) do
   end
 
   create_table "rosetta_translations", force: :cascade do |t|
-    t.text "value"
-    t.integer "locale_id", null: false
-    t.integer "translation_key_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["locale_id", "translation_key_id"], name: "index_rosetta_translations_on_locale_id_and_translation_key_id", unique: true
-    t.index ["locale_id"], name: "index_rosetta_translations_on_locale_id"
-    t.index ["translation_key_id"], name: "index_rosetta_translations_on_translation_key_id"
+    t.bigint "target_locale_id", null: false
+    t.bigint "from_id", null: false
+    t.bigint "to_id", null: false
+    t.index ["from_id"], name: "index_rosetta_translations_on_from_id"
+    t.index ["target_locale_id", "from_id", "to_id"], name: "rosetta_translations_uniqueness", unique: true
+    t.index ["target_locale_id"], name: "index_rosetta_translations_on_target_locale_id"
+    t.index ["to_id"], name: "index_rosetta_translations_on_to_id"
   end
 
-  add_foreign_key "rosetta_translations", "rosetta_locales", column: "locale_id"
-  add_foreign_key "rosetta_translations", "rosetta_translation_keys", column: "translation_key_id"
+  add_foreign_key "rosetta_text_entries", "rosetta_locales", column: "locale_id"
+  add_foreign_key "rosetta_translations", "rosetta_locales", column: "target_locale_id"
+  add_foreign_key "rosetta_translations", "rosetta_text_entries", column: "from_id"
+  add_foreign_key "rosetta_translations", "rosetta_text_entries", column: "to_id"
 end

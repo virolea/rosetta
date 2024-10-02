@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_30_135810) do
+ActiveRecord::Schema.define(version: 2024_10_02_152043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,13 +32,6 @@ ActiveRecord::Schema.define(version: 2024_09_30_135810) do
     t.index ["content"], name: "index_rosetta_text_entries_on_content"
     t.index ["locale_id", "content"], name: "index_rosetta_text_entries_on_locale_id_and_content", unique: true
     t.index ["locale_id"], name: "index_rosetta_text_entries_on_locale_id"
-  end
-
-  create_table "rosetta_translation_keys", force: :cascade do |t|
-    t.text "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["value"], name: "index_rosetta_translation_keys_on_value", unique: true
   end
 
   create_table "rosetta_translations", force: :cascade do |t|

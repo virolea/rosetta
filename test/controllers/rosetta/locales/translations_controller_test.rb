@@ -6,7 +6,6 @@ module Rosetta
 
     test "index" do
       locale = rosetta_locales(:french)
-      key = rosetta_translation_keys(:hello)
       get locale_translations_path(locale)
       assert_response :success
       assert_includes response.body, "hello"

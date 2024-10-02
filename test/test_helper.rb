@@ -25,9 +25,6 @@ class ActiveSupport::TestCase
   setup do
     reset_locale_setup
     ensure_translation_associations_loaded
-    Rosetta::Locale.default_locale = nil
-    Rosetta::Store.locale_stores.each { |code, store| store.reload! }
-    Rosetta.locale = :en
   end
 
   private

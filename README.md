@@ -1,4 +1,4 @@
-[![CI](https://github.com/virolea/rosetta/actions/workflows/ci.yml/badge.svg)](https://github.com/virolea/rosetta/actions/workflows/ci.yml)
+[![CI](https://github.com/virolea/rosetta/actions/workflows/ci.yml/badge.svg)](https://github.com/virolea/rosetta/actions/workflows/ci.yml) [![Gem Version](https://badge.fury.io/rb/rosetta-rails.svg)](https://badge.fury.io/rb/rosetta-rails)
 
 # Rosetta
 

@@ -6,7 +6,7 @@
       <%= tab_link_to locale_translations_missing_index_path(@locale) do %>
         Missing
         <span class="ml-3 hidden md:inline-block rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-100 text-gray-900 group-[.active]:bg-indigo-100 group-[.active]:text-indigo-600">
-          <%= Rosetta::TranslationKey.with_missing_translation(@locale).size %>
+          <%= Rosetta::TextEntry.where(locale: Rosetta::Locale.default_locale).missing_translation(@locale).size %>
         </span>
       <% end %>
     </nav>

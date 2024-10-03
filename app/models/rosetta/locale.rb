@@ -8,8 +8,7 @@ module Rosetta
     validates :code, uniqueness: true
     validates :code, format: { with: CODE_FORMAT, message: "must only contain letters separated by an optional dash" }
 
-    has_many :translations, dependent: :destroy
-
+    has_many :text_entries, dependent: :destroy
     after_create_commit :notify_translated_models
 
     class << self

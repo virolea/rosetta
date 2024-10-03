@@ -3,7 +3,7 @@ module Rosetta
     private
 
     def scope
-      TranslationKey.with_missing_translation(@locale)
+      Locale.default_locale.text_entries.missing_translation(@locale)
     end
   end
 end

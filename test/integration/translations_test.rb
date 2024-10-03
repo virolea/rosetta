@@ -22,10 +22,10 @@ class TranslationsTest < ActionDispatch::IntegrationTest
 
   test "deploying a new translation" do
     locale = rosetta_locales(:french)
-    key = Rosetta::TranslationKey.create(value: "Available locales")
+    key = Rosetta::TextEntry.create(content: "Available locales", locale: rosetta_locales(:english))
 
     # Create the translation
-    patch rosetta.translation_key_translation_path(key), params: { locale_id: locale.id, translation_key: { value_fr: "Langues disponibles" } }
+    patch rosetta.text_entry_translation_path(key), params: { locale_id: locale.id, text_entry: { content_fr: "Langues disponibles" } }
 
     # Deploy the changes
     post rosetta.locale_deploys_path(locale)

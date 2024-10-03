@@ -3,7 +3,7 @@ module Rosetta
     include LocaleScoped
 
     def index
-      @pagy, @translation_keys = pagy(scope)
+      @pagy, @text_entries = pagy(scope)
 
       render "rosetta/locales/translations/index"
     end
@@ -11,7 +11,7 @@ module Rosetta
     private
 
     def scope
-      TranslationKey.with_translation(@locale)
+      TextEntry.with_translated_version(@locale).where(locale: Locale.default_locale)
     end
   end
 end

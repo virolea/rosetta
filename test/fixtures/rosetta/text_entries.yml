@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+hello:
+  content: hello
+  locale: english
+
+bonjour:
+  content: bonjour
+  locale: french
+
+hola:
+  content: hola
+  locale: spanish
+
+goodbye:
+  content: goodbye
+  locale: english

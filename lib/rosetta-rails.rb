@@ -34,9 +34,9 @@ module Rosetta
       Thread.current[:rosetta_locale_session] ||= LocaleSession.new
     end
 
-    def translate(key, locale: Rosetta.locale)
+    def translate(content, locale: Rosetta.locale)
       store = Store.for_locale(locale)
-      store.lookup(key)
+      store.lookup(content)
     end
 
     def available_locales

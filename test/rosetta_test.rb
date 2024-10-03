@@ -25,7 +25,7 @@ class RosettaTest < ActiveSupport::TestCase
     assert_equal Rosetta.locale, Rosetta::Locale.default_locale
   end
 
-  test "#translate translates the key in the selected loacle" do
+  test "#translate translates the key in the selected locale" do
     Rosetta.with_locale(rosetta_locales(:french)) { assert_equal "bonjour", Rosetta.translate("hello") }
     assert_equal "bonjour", Rosetta.translate("hello", locale: rosetta_locales(:french))
     assert_equal "hola", Rosetta.translate("hello", locale: rosetta_locales(:spanish))

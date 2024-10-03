@@ -22,15 +22,30 @@ end
 # End Note
 
 class ActiveSupport::TestCase
+  setup do
+    reset_locale_setup
+    ensure_translation_associations_loaded
+  end
+
+  private
+
   # Provide a clean slate for each test:
   # - Unset the default locale
-  # - Reset the registered classes for translations
   # - Reload all locale stores
+  # - Reset the registered classes for translations
   # - Set the locale to the default locale
-  setup do
+  def reset_locale_setup
     Rosetta::Locale.default_locale = nil
-    Rosetta::Locale.registered_classes_for_translations = []
     Rosetta::Store.locale_stores.each { |code, store| store.reload! }
+    Rosetta::Locale.registered_classes_for_translations = []
     Rosetta.locale = :en
+  end
+
+  # Fixtures are loaded after the code, hence association for the locale fixtures
+  # are not loaded when the tests start.
+  def ensure_translation_associations_loaded
+    return if Rosetta::TextEntry.respond_to?(:fr_translation)
+
+    Rosetta::TextEntry.translate_in_all_locales
   end
 end

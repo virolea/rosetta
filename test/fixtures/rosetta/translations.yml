@@ -1,9 +1,9 @@
-french_hello:
-  translation_key: hello
-  locale: french
-  value: bonjour
+hello_from_english_to_french:
+  from: hello
+  to: bonjour
+  target_locale: french
 
-spanish_hello:
-  translation_key: hello
-  locale: spanish
-  value: hola
+hello_from_english_to_spanish:
+  from: hello
+  to: hola
+  target_locale: spanish

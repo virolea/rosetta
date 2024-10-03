@@ -10,6 +10,7 @@ module Rosetta
 
     has_many :text_entries, dependent: :destroy
     after_create_commit :notify_translated_models
+    has_many :pluralization_rules, dependent: :destroy
 
     class << self
       def available_locales

@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2024_10_02_152043) do
     t.index ["code"], name: "index_rosetta_locales_on_code", unique: true
   end
 
+  create_table "rosetta_pluralization_rules", force: :cascade do |t|
+    t.string "name"
+    t.string "operator"
+    t.integer "threshold"
+    t.bigint "locale_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locale_id"], name: "index_rosetta_pluralization_rules_on_locale_id"
+  end
+
   create_table "rosetta_text_entries", force: :cascade do |t|
     t.text "content", null: false
     t.bigint "locale_id", null: false
@@ -46,6 +56,7 @@ ActiveRecord::Schema.define(version: 2024_10_02_152043) do
     t.index ["to_id"], name: "index_rosetta_translations_on_to_id"
   end
 
+  add_foreign_key "rosetta_pluralization_rules", "rosetta_locales", column: "locale_id"
   add_foreign_key "rosetta_text_entries", "rosetta_locales", column: "locale_id"
   add_foreign_key "rosetta_translations", "rosetta_locales", column: "target_locale_id"
   add_foreign_key "rosetta_translations", "rosetta_text_entries", column: "from_id"

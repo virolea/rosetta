@@ -9,6 +9,8 @@ module Rosetta
 
     class_methods do
       def translate_in_all_locales
+        return unless ActiveRecord::Base.connection.table_exists?("rosetta_locales")
+
         Locale.all.each do |locale|
           translated_in(locale)
         end

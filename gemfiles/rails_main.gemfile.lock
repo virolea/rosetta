@@ -100,7 +100,7 @@ GIT
 PATH
   remote: ..
   specs:
-    rosetta-rails (0.1.1)
+    rosetta-rails (0.2.1)
       concurrent-ruby (~> 1.3)
       pagy (>= 7.0)
       rails (>= 6.1.0)

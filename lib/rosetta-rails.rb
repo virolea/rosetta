@@ -9,6 +9,8 @@ require "rosetta/translated"
 require "rosetta/translated/create"
 require "rosetta/translated/delete"
 
+require "rosetta/pluralization"
+
 module Rosetta
   module Base
     def locale
